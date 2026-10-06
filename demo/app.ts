@@ -64,6 +64,7 @@ function render(file: File, url: string, result: CheckResult) {
       c.signedAt ? new Date(c.signedAt).toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" }) : "Not stated",
     );
     row(dl, "File vs signature", c.validation.contentMatchesSignature ? "Matches what was signed" : "Does not match what was signed");
+    row(dl, "Reader state", c.validation.readerState ? `${c.validation.readerState} (codes below, if any)` : "Not stated");
     row(dl, "Signer check", "Not checked against a trust list");
     body.append(dl);
     if (c.validation.failureCodes.length) {
