@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'unsafe-inline'; img-src blob: data:; connect-src 'self'; worker-src blob:; base-uri 'none'; form-action 'none'">
+<title>Content Credentials checker</title>
+<meta name="description" content="Read the C2PA Content Credentials in an image. Runs in your browser; the file never leaves your device. It does not detect AI from pixels and does not check signers against a trust list.">
+<style>
+:root{--bg:#f7f4ee;--raised:#fcfaf6;--fg:#0a1628;--muted:#23324b;--soft:#55637a;--hair:#ddd5c8;--hair2:#c8bca9;--gold:#b99b57;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--sans)}
+main{max-width:720px;margin:0 auto;padding:56px 24px 72px}
+h1{font:400 clamp(1.6rem,4vw,2.1rem)/1.25 var(--serif);margin:0 0 12px}
+.lede{color:var(--muted);margin:0 0 32px;max-width:60ch}
+.ui{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;padding:56px 24px;background:var(--raised);border:1px dashed var(--hair2);border-radius:2px;color:var(--fg);font:inherit;cursor:pointer;text-align:center;transition:border-color .3s cubic-bezier(.25,.1,.25,1)}
+.drop:hover,.drop[data-drag="1"]{border-color:var(--fg)}
+.drop small{color:var(--soft)}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px;border-radius:2px}
+.card{margin-top:24px;background:var(--raised);border:1px solid var(--hair);border-radius:2px;overflow:hidden}
+.card img{display:block;width:100%;max-height:340px;object-fit:contain;background:#efeae1;border-bottom:1px solid var(--hair)}
+.card .body{padding:24px}
+.name{font:11px var(--mono);color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+h2{font:400 1.2rem/1.4 var(--sans);margin:14px 0 0}
+dl{margin:20px 0 0;border-top:1px solid var(--hair)}
+.row{display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--hair)}
+dt{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);flex:none}
+dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.note{color:var(--soft);margin:16px 0 0}
+.codes{font:11px var(--mono);color:var(--soft);margin:12px 0 0;padding:0;list-style:none}
+button.again{margin-top:24px;padding:12px 22px;background:transparent;border:1px solid var(--hair2);border-radius:2px;color:var(--fg);font:11px var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .3s cubic-bezier(.25,.1,.25,1)}
+button.again:hover{border-color:var(--fg)}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--hair);color:var(--soft)}
+footer a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px}
+footer a:hover{border-color:var(--fg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-color-scheme:dark){:root{--bg:#0a1628;--raised:#0e1d33;--fg:#f2f5fa;--muted:#a9b7cd;--soft:#7688a3;--hair:#1f3760;--hair2:#2c4a7a;--gold:#c9a961}.card img{background:#122444}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <p class="ui">C2PA Content Credentials</p>
+  <h1>Check an image’s content credentials.</h1>
+  <p class="lede">Reads the C2PA data embedded in an image file: who signed it, which tool made it, whether it declares AI generation, when, and whether the file still matches what was signed. It cannot tell whether an image without credentials is AI-generated, and it does not check signers against a trust list.</p>
+
+  <input id="file" class="sr" type="file" accept="image/*" aria-label="Choose an image to check">
+  <button id="drop" class="drop" type="button">
+    <span>Drop an image here, or choose a file</span>
+    <small>Read in your browser. The file is not uploaded.</small>
+  </button>
+
+  <div id="out" aria-live="polite"></div>
+
+  <footer>
+    <p>Sign your own images: <a href="https://www.proofcan.com">proofcan.com</a>. More on how this works: <a href="https://www.proofcan.com/pulse/check">proofcan.com/pulse/check</a>.</p>
+    <p class="ui">Open source (MIT) · No cookies, no analytics, no third-party requests</p>
+  </footer>
+</main>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
