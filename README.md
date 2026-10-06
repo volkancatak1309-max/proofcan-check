@@ -2,7 +2,7 @@
 
 Read the **C2PA Content Credentials** in an image, in the browser. The file is read on the device and is never uploaded.
 
-> Package name is provisional until it is published.
+> **Not yet published to npm.** The package name is provisional and `npm install` will not work until the first release. Until then, build from source (see below).
 
 It reports what a file *declares*: who signed it, which tool made it, any declared source type (for example "created by a generative AI model"), when, and whether the file still matches what was signed. It is the open-source reader behind [proofcan.com/pulse/check](https://www.proofcan.com/pulse/check).
 
@@ -15,9 +15,13 @@ It reports what a file *declares*: who signed it, which tool made it, any declar
 
 ## Install
 
+> Not yet published to npm. The command below will work only after the first release.
+
 ```sh
 npm install @proofcan/c2pa-check
 ```
+
+From source today: `git clone https://github.com/volkancatak1309-max/proofcan-check && cd proofcan-check && npm install && npm run build`.
 
 Browser only (it uses WebAssembly and a Web Worker). The default location of the wasm file is `new URL("./c2pa.wasm", import.meta.url)`. This repository has tested that with an esbuild bundle and with the unbundled package in Chrome; other bundlers are untested here, so if yours does not copy or rewrite that URL, pass `wasmUrl` (below).
 
