@@ -2,7 +2,7 @@
 
 Read the **C2PA Content Credentials** in an image, in the browser. The file is read on the device and is never uploaded.
 
-> **Not yet published to npm.** The package name is provisional and `npm install` will not work until the first release. Until then, build from source (see below).
+> **Not yet published to npm.** The package name is provisional and `npm install` will not work until the first release. Until then, build from source (see Install).
 
 It reports what a file *declares*: who signed it, which tool made it, any declared source type (for example "created by a generative AI model"), when, and whether the file still matches what was signed. It is the open-source reader behind [proofcan.com/pulse/check](https://www.proofcan.com/pulse/check).
 
